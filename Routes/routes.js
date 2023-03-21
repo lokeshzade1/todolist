@@ -33,4 +33,32 @@ app.get('/get',async (req,res)=>{
         })
     }
 })
+app.delete('/delete',async (req,res)=>{
+    try{
+        let result=await data.deleteOne({_id:req.body.id})
+        if(result){
+            res.json({
+                val:result
+            })
+        }
+    } catch (error) {
+        res.json({
+            val:error
+        })
+    }
+})
+app.put('/put',async (req,res)=>{
+    try {
+        let result=await data.updateOne({id:req.body.id,$set:{item:req.body.item}})
+        if(result){
+            res.json({
+                val:result
+            })
+        }
+    } catch (error) {
+        res.json({
+            val:error
+        })
+    }
+})
 module.exports=app
